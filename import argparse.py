@@ -1,4 +1,4 @@
-# import argparse
+import argparse
 import subprocess
 import os
 import zlib
@@ -6,7 +6,7 @@ import zlib
 def run_binwalk(file_path):
     print(f"binwalking on {file_path}")
     try:
-        command = ["binwalk", file_path]
+        command = ["binwalk", "-e", file_path]
         result = subprocess.run(command, capture_output=True, text=True)
         return result
     except Exception as e:
@@ -32,14 +32,14 @@ def decompress_data(file_path):
         print(f"Error decompressing data: {e}")
         return None
 
-# def parse_arguments():
-#     parser = argparse.ArgumentParser(description="CLI tool to identify hidden files using steganography or binwalk")
-#     parser.add_argument('file', type=str, help="The file to analyze")
-#     return parser.parse_args()
-
+def parse_arguments():
+    parser = argparse.ArgumentParser(description="CLI tool to identify hidden files using steganography or binwalk")
+    parser.add_argument('file', type=str, help="The file to analyze")
+    return parser.parse_args()
 
 def main():
-    file_path = "/Users/prakharkhurana/Desktop/download (1).png"
+    args = parse_arguments()
+    file_path = args.file
 
     if not os.path.isfile(file_path):
         print(f"The file {file_path} does not exist.")
@@ -56,7 +56,7 @@ def main():
         print(stego_results)
         readable_message = decompress_data(stego_results)
         if readable_message:
-            print("Decompressed steganography mnssage")
+            print("Decompressed steganography message")
             print(readable_message)
 
 if __name__ == "__main__":
