@@ -1,0 +1,7 @@
+Running Module: SVImage
++---------------------------+------+
+|        Image Format       | Mode |
++---------------------------+------+
+| Portable network graphics | RGBA |
++---------------------------+------+
+Running Module: MultiHandler
